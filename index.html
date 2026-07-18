@@ -17,13 +17,36 @@
     --accent: #D4AF37;      /* metallic gold */
     --accent-bright: #F2E8C4;
     --line: rgba(212, 175, 55, 0.3);
+    --line-faint: rgba(212, 175, 55, 0.18);
+    --hatch: rgba(212, 175, 55, 0.035);
+    --sunburst: rgba(212, 175, 55, 0.14);
+    --glow: rgba(212, 175, 55, 0.2);
+    --glow-strong: rgba(212, 175, 55, 0.25);
+    --glow-active: rgba(212, 175, 55, 0.4);
+  }
+  /* Light Art Deco variant — ivory & antique gold. Toggled by the button
+     below via data-theme on <html>; dark is the default. */
+  :root[data-theme="light"] {
+    --bg: #EDE7D8;
+    --panel: #FAF7EE;
+    --ink: #2B2416;
+    --muted: #7A6F5C;
+    --accent: #8C6D1F;
+    --accent-bright: #5E4813;
+    --line: rgba(140, 109, 31, 0.4);
+    --line-faint: rgba(140, 109, 31, 0.2);
+    --hatch: rgba(140, 109, 31, 0.05);
+    --sunburst: rgba(212, 175, 55, 0.25);
+    --glow: rgba(60, 46, 10, 0.15);
+    --glow-strong: rgba(140, 109, 31, 0.3);
+    --glow-active: rgba(140, 109, 31, 0.35);
   }
   html, body {
     background-color: var(--bg);
     background-image:
-      radial-gradient(ellipse 90% 55% at 50% -5%, rgba(212, 175, 55, 0.14), transparent 70%),
-      repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.035) 0 1px, transparent 1px 16px),
-      repeating-linear-gradient(-45deg, rgba(212, 175, 55, 0.035) 0 1px, transparent 1px 16px);
+      radial-gradient(ellipse 90% 55% at 50% -5%, var(--sunburst), transparent 70%),
+      repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 16px),
+      repeating-linear-gradient(-45deg, var(--hatch) 0 1px, transparent 1px 16px);
     color: var(--ink);
     font-family: "Josefin Sans", Futura, "Century Gothic", "Trebuchet MS", sans-serif;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
@@ -50,7 +73,7 @@
     font-size: clamp(30px, 7vw, 60px); font-weight: 400;
     text-transform: uppercase; letter-spacing: 0.18em;
     color: var(--accent); line-height: 1.1; overflow-wrap: anywhere;
-    text-shadow: 0 0 24px rgba(212, 175, 55, 0.25);
+    text-shadow: 0 0 24px var(--glow-strong);
   }
 
   /* TYPE FILTERS — precision instruments, not soft pills. */
@@ -64,10 +87,10 @@
     padding: 14px 22px 12px; cursor: pointer;
     transition: all .3s ease-out;
   }
-  .filter:hover { border-color: var(--accent); box-shadow: 0 0 15px rgba(212, 175, 55, 0.25); }
+  .filter:hover { border-color: var(--accent); box-shadow: 0 0 15px var(--glow-strong); }
   .filter.active {
-    background: var(--accent); border-color: var(--accent); color: #0A0A0A;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    background: var(--accent); border-color: var(--accent); color: var(--bg);
+    box-shadow: 0 0 20px var(--glow-active);
   }
   .filter:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
@@ -89,7 +112,7 @@
   a.card::after { bottom: 6px; right: 6px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
   a.card:hover, a.card:focus-visible {
     border-color: var(--accent); transform: translateY(-6px);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 20px var(--glow);
   }
   a.card:hover::before, a.card:hover::after,
   a.card:focus-visible::before, a.card:focus-visible::after { opacity: 1; }
@@ -106,7 +129,7 @@
     font-weight: 300; overflow-wrap: anywhere; }
   .card .src { margin-top: auto; padding-top: 10px; font-size: 10px;
     letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
-    border-top: 1px solid rgba(212, 175, 55, 0.18); }
+    border-top: 1px solid var(--line-faint); }
 
   footer {
     margin-top: auto; padding-top: clamp(28px, 5vw, 48px);
@@ -114,10 +137,24 @@
     font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
   }
 
-  @media print { .filters { display: none; } }
+  .theme-toggle {
+    position: fixed; top: 14px; right: 14px; z-index: 10;
+    font-family: inherit; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 0;
+    padding: 10px 16px 8px; cursor: pointer;
+    transition: all .3s ease-out;
+  }
+  .theme-toggle:hover { border-color: var(--accent); box-shadow: 0 0 15px var(--glow-strong); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media print { .filters, .theme-toggle { display: none; } }
 </style>
 </head>
 <body>
+
+  <button class="theme-toggle" type="button" aria-label="Switch to light theme">Light</button>
   <div class="page">
     <header>
       <div class="ornament" aria-hidden="true">
@@ -254,6 +291,31 @@
 
       var initial = location.hash.slice(1);
       apply(chips.some(function (c) { return c.dataset.filter === initial; }) ? initial : 'all');
+    })();
+  </script>
+  <script>
+    (function () {
+      var KEY = 'recipe-cards-theme';
+      var root = document.documentElement;
+      var btn = document.querySelector('.theme-toggle');
+      function apply(t) {
+        if (t === 'light') { root.setAttribute('data-theme', 'light'); }
+        else { root.removeAttribute('data-theme'); }
+        if (btn) {
+          btn.textContent = t === 'light' ? 'Dark' : 'Light';
+          btn.setAttribute('aria-label', 'Switch to ' + (t === 'light' ? 'dark' : 'light') + ' theme');
+        }
+      }
+      var saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+      apply(saved === 'light' ? 'light' : 'dark');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+          try { localStorage.setItem(KEY, next); } catch (e) {}
+          apply(next);
+        });
+      }
     })();
   </script>
 </body>
