@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Cards</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #2b2420;
+    --muted: #8a7d72;
+    --accent: #c4622d;
+    --accent-soft: #f6ede4;
+    --line: #e4d9cc;
+    --cream: #fdfaf6;
+  }
+  html, body {
+    background: #efe7dc; color: var(--ink);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 100%; max-width: 210mm; margin: 0 auto; min-height: 100vh;
+    background: var(--cream); padding: clamp(18px, 4.5vw, 15mm);
+    display: flex; flex-direction: column;
+  }
+
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 6mm; margin-bottom: 8mm; }
+  .eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+  h1 { font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(28px, 6.5vw, 40px);
+    line-height: 1.08; font-weight: 700; letter-spacing: -0.5px; overflow-wrap: anywhere; }
+  .sub { margin-top: 8px; font-size: 13px; color: var(--muted); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+    gap: 14px; }
+  a.card { display: flex; flex-direction: column; gap: 8px; min-width: 0;
+    background: var(--accent-soft); border-radius: 10px; padding: 16px 16px 14px;
+    text-decoration: none; color: var(--ink);
+    border: 1px solid transparent; transition: border-color .15s ease, transform .15s ease; }
+  a.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card .kind { font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; }
+  .card h2 { font-family: Georgia, serif; font-size: 19px; line-height: 1.15;
+    font-weight: 700; letter-spacing: -0.2px; overflow-wrap: anywhere; }
+  .card .desc { font-size: 12px; line-height: 1.45; color: var(--muted); overflow-wrap: anywhere; }
+  .card .src { margin-top: auto; padding-top: 8px; font-size: 10.5px; color: var(--muted);
+    border-top: 1px solid var(--line); }
+
+  footer { margin-top: auto; padding-top: 8mm; font-size: 10.5px; color: var(--muted);
+    border-top: 1px solid var(--line); display: flex; justify-content: space-between;
+    gap: 10px; flex-wrap: wrap; margin-top: 10mm; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Directory</div>
+      <h1>Recipe Cards</h1>
+      <div class="sub">Recipe screenshots turned into clean, printable cards. Tap any card to open it; use your browser&rsquo;s print dialog to save as PDF.</div>
+    </header>
+
+    <!-- RECIPE LIST
+         To add a new recipe: copy one <a class="card"> block, update the href
+         (file lives in recipes/), title, description, and source. Newest first. -->
+    <div class="grid">
+
+      <a class="card" href="recipes/chicken-shawarma-recipe-card.html">
+        <span class="kind">Freezer meal prep</span>
+        <h2>Chicken Shawarma</h2>
+        <span class="desc">Greek-yogurt marinated, freezer-friendly, 8 servings. 367 kcal / 55 g protein per serving.</span>
+        <span class="src">@shreddedandfed</span>
+      </a>
+
+      <a class="card" href="recipes/death-by-chocolate-cake-recipe-card.html">
+        <span class="kind">Layer cake</span>
+        <h2>Death by Chocolate Cake</h2>
+        <span class="desc">Dark chocolate layers, chocolate buttercream, chocolate simple syrup &mdash; full multi-component bake with gram weights.</span>
+        <span class="src">Chelsweets &middot; chelsweets.com</span>
+      </a>
+
+      <a class="card" href="recipes/chilli-lime-chicken-corn-bowl-recipe-card.html">
+        <span class="kind">High-protein bowl</span>
+        <h2>Chilli Lime Chicken &amp; Charred Corn Bowl</h2>
+        <span class="desc">Marinated chicken, elote-style corn salad, creamy yogurt sauce. 475 kcal / 58 g protein per serving.</span>
+        <span class="src">@louishowardpt &middot; adapted from @amateurprochef</span>
+      </a>
+
+      <a class="card" href="recipes/chicken-marinades-recipe-cards.html">
+        <span class="kind">Marinades &middot; 5 cards</span>
+        <h2>Chicken Marinades</h2>
+        <span class="desc">Hot Honey Harissa, Cilantro Lime, Sweet &amp; Spicy Korean, Sorta Somali Suqaar, and Teriyaki &mdash; scaled for 6 thighs.</span>
+        <span class="src">@seemagetsbaked</span>
+      </a>
+
+      <a class="card" href="recipes/bang-bang-chicken-bowl-recipe-card.html">
+        <span class="kind">High-protein bowl</span>
+        <h2>Creamy Bang Bang Chicken Bowl</h2>
+        <span class="desc">Spiced chicken, cucumber cabbage slaw, and creamy bang bang sauce over lowcarb rice. Serves 4.</span>
+        <span class="src">@shredhappens</span>
+      </a>
+
+    </div>
+
+    <footer>
+      <span>Cards generated by the recipe-card Claude skill.</span>
+      <span>5 recipes</span>
+    </footer>
+  </div>
+</body>
+</html>

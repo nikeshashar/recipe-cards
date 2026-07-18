@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chilli Lime Chicken &amp; Charred Corn Bowl</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #2b2420;
+    --muted: #7a6f66;
+    --accent: #c4622d;
+    --accent-soft: #f6ede4;
+    --line: #e4d9cc;
+    --cream: #fdfaf6;
+  }
+  html, body {
+    background: #efe7dc;
+    color: var(--ink);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto;
+    background: var(--cream); padding: 12mm 14mm 11mm;
+    display: flex; flex-direction: column;
+  }
+
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 5mm; }
+  .eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 5px; }
+  h1 { font-family: Georgia, "Times New Roman", serif; font-size: 33px;
+    line-height: 1.08; font-weight: 700; letter-spacing: -0.5px; max-width: 92%; }
+  .macros-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); margin: 11px 0 6px; }
+  .meta { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip { background: var(--accent-soft); border-radius: 999px;
+    padding: 5px 13px; font-size: 11px; color: var(--ink); }
+  .chip b { color: var(--accent); font-weight: 700; }
+
+  .body { display: grid; grid-template-columns: 67mm 1fr; gap: 10mm; margin-top: 6mm; flex: 1; }
+  .section-label { font-family: Georgia, serif; font-size: 15px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+
+  .ingredients { background: var(--accent-soft); border-radius: 8px; padding: 6mm; align-self: start; }
+  .ingredient-group { font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--accent); margin: 11px 0 4px; }
+  .ingredient-group:first-of-type { margin-top: 0; }
+  .ingredients ul { list-style: none; }
+  .ingredients li { font-size: 12px; line-height: 1.4; padding: 4px 0 4px 17px;
+    border-bottom: 1px solid var(--line); position: relative; }
+  .ingredients li:last-child { border-bottom: none; }
+  .ingredients li::before { content: ""; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px; border: 1.5px solid var(--accent); border-radius: 2px; }
+  .opt { color: var(--muted); font-style: italic; }
+
+  .method ol { list-style: none; counter-reset: step; }
+  .method li { counter-increment: step; position: relative;
+    padding: 0 0 11px 32px; font-size: 12.5px; line-height: 1.5; }
+  .method li::before { content: counter(step); position: absolute; left: 0; top: -1px;
+    width: 22px; height: 22px; background: var(--accent); color: #fff; border-radius: 50%;
+    font-size: 11px; font-weight: 700; display: flex; align-items: center;
+    justify-content: center; font-family: Georgia, serif; }
+  .method li:not(:last-child)::after { content: ""; position: absolute; left: 10.5px;
+    top: 24px; bottom: 3px; width: 1px; background: var(--line); }
+
+  .swap-note { margin-top: 7px; font-size: 11px; line-height: 1.45; color: var(--muted);
+    background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: 6px; padding: 3mm 4mm; }
+  .swap-note b { color: var(--ink); }
+
+  footer { margin-top: auto; padding-top: 5mm; border-top: 1px solid var(--line);
+    font-size: 10px; color: var(--muted); display: flex; justify-content: space-between; gap: 10px; }
+  .fn { font-style: italic; }
+
+  @media print { html, body { background: #fff; } .page { margin: 0; } }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Recipe</div>
+      <h1>Chilli Lime Chicken &amp; Charred Corn Bowl</h1>
+      <div class="macros-label">Macros &middot; per serving</div>
+      <div class="meta">
+        <span class="chip"><b>475</b> kcal</span>
+        <span class="chip"><b>58 g</b> protein</span>
+        <span class="chip"><b>21 g</b> carbs</span>
+        <span class="chip"><b>18 g</b> fat</span>
+      </div>
+    </header>
+
+    <div class="body">
+      <aside class="ingredients">
+        <div class="section-label">Ingredients</div>
+
+        <div class="ingredient-group">Chicken</div>
+        <ul><li>800 g chicken breast, diced</li></ul>
+
+        <div class="ingredient-group">Marinade</div>
+        <ul>
+          <li>2 tbsp lime juice</li>
+          <li>1 tbsp avocado oil</li>
+          <li>2 tsp chilli powder</li>
+          <li>1&frac12; tsp ground cumin</li>
+          <li>1 tsp garlic powder</li>
+          <li>1 tsp paprika</li>
+          <li>1 tsp salt</li>
+          <li>&frac12; tsp &ldquo;african american pepper&rdquo; <sup>*</sup></li>
+        </ul>
+
+        <div class="ingredient-group">Salad</div>
+        <ul>
+          <li>2 cups sweetcorn (about 2 drained tins)</li>
+          <li>1 large red onion, finely diced</li>
+          <li>1 large red bell pepper, finely diced</li>
+          <li>3 jalape&ntilde;os, finely diced</li>
+          <li>1 handful fresh coriander, chopped</li>
+          <li>50 g Cotija cheese, crumbled <span class="opt">(feta works)</span></li>
+        </ul>
+
+        <div class="ingredient-group">Sauce</div>
+        <ul>
+          <li>250 g 0% Greek yogurt</li>
+          <li>Juice of &frac12; lime</li>
+          <li>1 tbsp hot sauce</li>
+          <li>1 tsp Taj&iacute;n seasoning</li>
+          <li>120 ml water</li>
+          <li>Salt, to taste</li>
+          <li>&ldquo;African american pepper&rdquo;, to taste <sup>*</sup></li>
+        </ul>
+      </aside>
+
+      <section class="method">
+        <div class="section-label">Method</div>
+        <ol>
+          <li>Add the diced chicken, lime juice, avocado oil, chilli powder, cumin, garlic powder, paprika, salt and pepper to a bowl and mix well.</li>
+          <li>Leave to marinate for at least 15 to 30 minutes.</li>
+          <li>Meanwhile, drain the sweetcorn and pat dry with kitchen roll.</li>
+          <li>Heat a large pan over high heat and char the sweetcorn until slightly blackened, then set aside to cool.</li>
+          <li>Cook the chicken in a large frying pan until fully cooked through and slightly browned.</li>
+          <li>In a large bowl, combine the sweetcorn, red onion, red pepper, jalape&ntilde;os, coriander and Cotija cheese.</li>
+          <li>In a separate bowl, mix the Greek yogurt, lime juice, hot sauce, Taj&iacute;n, water, salt and pepper.</li>
+          <li>Pour the sauce over the salad mixture and stir well.</li>
+          <li>Add the cooked chicken and give everything a final mix.</li>
+          <li>Serve immediately, or divide into meal prep containers.</li>
+        </ol>
+        <div class="swap-note"><b>* &ldquo;African american pepper&rdquo;</b> looks like an autocorrect slip in the original post. The intended pepper isn&rsquo;t clear from the recipe, so it&rsquo;s left as written &mdash; use a chilli/cayenne-style pepper to whatever heat you like.</div>
+      </section>
+    </div>
+
+    <footer>
+      <span class="fn">Cotija swapped for feta in the original cook.</span>
+      <span>Recipe by @louishowardpt &middot; adapted from @amateurprochef</span>
+    </footer>
+  </div>
+</body>
+</html>

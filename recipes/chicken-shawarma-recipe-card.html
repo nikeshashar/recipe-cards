@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freezer-Friendly Chicken Shawarma</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #2b2420;
+    --muted: #8a7d72;
+    --accent: #c4622d;
+    --accent-soft: #f6ede4;
+    --line: #e4d9cc;
+    --cream: #fdfaf6;
+  }
+  html, body {
+    background: #efe7dc; color: var(--ink);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 100%; max-width: 210mm; margin: 0 auto; background: var(--cream);
+    padding: clamp(18px, 4.5vw, 15mm);
+    display: flex; flex-direction: column;
+  }
+
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 6mm; }
+  .eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+  h1 { font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(26px, 6vw, 36px);
+    line-height: 1.08; font-weight: 700; letter-spacing: -0.5px;
+    overflow-wrap: anywhere; }
+  .macros-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); margin: 12px 0 6px; }
+  .meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .meta + .macros-label { margin-top: 10px; }
+  .chip { background: var(--accent-soft); border-radius: 999px; padding: 5px 13px;
+    font-size: 11px; color: var(--ink); }
+  .chip b { color: var(--accent); font-weight: 700; }
+
+  .body {
+    display: grid;
+    grid-template-columns: minmax(0, 66mm) minmax(0, 1fr);
+    gap: clamp(16px, 3vw, 11mm);
+    margin-top: 7mm; flex: 1;
+  }
+  .ingredients, .method { min-width: 0; }
+
+  .section-label { font-family: Georgia, serif; font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+
+  .ingredients { background: var(--accent-soft); border-radius: 8px;
+    padding: 6mm; align-self: start; }
+  .ingredient-group { font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--accent); margin: 13px 0 5px; }
+  .ingredient-group:first-of-type { margin-top: 0; }
+  .ingredients ul { list-style: none; }
+  .ingredients li { font-size: 12.5px; line-height: 1.45; padding: 5px 0 5px 18px;
+    border-bottom: 1px solid var(--line); position: relative;
+    overflow-wrap: anywhere; }
+  .ingredients li:last-child { border-bottom: none; }
+  .ingredients li::before { content: ""; position: absolute; left: 0; top: 10px;
+    width: 7px; height: 7px; border: 1.5px solid var(--accent); border-radius: 2px; }
+
+  .method ol { list-style: none; counter-reset: step; }
+  .method li { counter-increment: step; position: relative;
+    padding: 0 0 13px 34px; font-size: 13px; line-height: 1.55;
+    overflow-wrap: anywhere; }
+  .method li::before { content: counter(step); position: absolute; left: 0; top: -1px;
+    width: 24px; height: 24px; background: var(--accent); color: #fff; border-radius: 50%;
+    font-size: 12px; font-weight: 700; display: flex; align-items: center;
+    justify-content: center; font-family: Georgia, serif; }
+  .method li:not(:last-child)::after { content: ""; position: absolute; left: 11.5px;
+    top: 26px; bottom: 4px; width: 1px; background: var(--line); }
+  .step-head { color: var(--accent); font-weight: 700; }
+
+  .serve { margin-top: 6px; background: var(--accent-soft); border-radius: 8px;
+    padding: 4mm 5mm; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+  .serve b { color: var(--accent); }
+
+  .footnote { margin-top: 8px; font-size: 11px; line-height: 1.45; color: var(--muted);
+    background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: 6px; padding: 3mm 4mm; overflow-wrap: anywhere; }
+  .footnote b { color: var(--ink); }
+
+  footer { margin-top: auto; padding-top: 6mm; border-top: 1px solid var(--line);
+    font-size: 10px; color: var(--muted);
+    display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+
+  @media (max-width: 560px) {
+    .body { grid-template-columns: 1fr; gap: 7mm; }
+  }
+
+  @media print {
+    @page { size: A4; margin: 0; }
+    html, body { background: #fff; }
+    .page { width: 210mm; min-height: 297mm; max-width: none;
+      margin: 0; padding: 14mm 15mm 12mm; }
+    .body { grid-template-columns: minmax(0, 66mm) minmax(0, 1fr); gap: 11mm; }
+    h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Freezer Meal Prep</div>
+      <h1>Chicken Shawarma</h1>
+      <div class="meta">
+        <span class="chip"><b>Serves</b> 8</span>
+        <span class="chip"><b>Marinate</b> 3&ndash;20 hrs</span>
+        <span class="chip"><b>Freeze</b> up to 3&ndash;4 months</span>
+      </div>
+      <div class="macros-label">Macros &middot; per serving</div>
+      <div class="meta">
+        <span class="chip"><b>367</b> kcal</span>
+        <span class="chip"><b>55 g</b> protein</span>
+        <span class="chip"><b>15 g</b> fat</span>
+        <span class="chip"><b>4 g</b> carbs</span>
+      </div>
+    </header>
+
+    <div class="body">
+      <aside class="ingredients">
+        <div class="section-label">Ingredients</div>
+        <ul>
+          <li>2.1 kg boneless skinless chicken thighs</li>
+          <li>200 g 0% Greek yogurt</li>
+          <li>2 tbsp olive oil</li>
+          <li>4 garlic cloves</li>
+          <li>1/4 cup lemon juice</li>
+          <li>2 tbsp coriander</li>
+          <li>2 tbsp cumin</li>
+          <li>4 tsp cardamom</li>
+          <li>2 tsp cayenne</li>
+          <li>4 tsp smoked paprika</li>
+          <li>4 tsp salt</li>
+        </ul>
+      </aside>
+
+      <section class="method">
+        <div class="section-label">Method</div>
+        <ol>
+          <li><span class="step-head">Prep once.</span> Combine the yogurt, olive oil, garlic, lemon juice and all the spices, then coat the chicken thighs thoroughly in the marinade.</li>
+          <li><span class="step-head">Marinate.</span> Leave for 3&ndash;20 hours before cooking or freezing.</li>
+          <li><span class="step-head">Freeze raw.</span> Portion into freezer bags or containers and freeze for up to 3&ndash;4 months. Thaw before cooking.</li>
+          <li><span class="step-head">Cook fresh.</span> Cook the chicken through until fully done &mdash; 74&deg;C / 165&deg;F in the thickest part.<sup>*</sup></li>
+        </ol>
+
+        <div class="serve"><b>Serving ideas:</b> rice or pita, sumac salad, and a Greek yogurt dip.</div>
+
+        <div class="footnote"><b>*</b> The original post gives prep, marinating and freezing instructions but no cooking method &mdash; step 4 is general guidance (the temperature is standard food safety). Grill, roast or pan-fry as you prefer.</div>
+      </section>
+    </div>
+
+    <footer>
+      <span>Freezer-friendly &middot; prep once, freeze raw, cook fresh</span>
+      <span>Recipe by @shreddedandfed</span>
+    </footer>
+  </div>
+</body>
+</html>

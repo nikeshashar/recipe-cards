@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--
+  RECIPE CARD TEMPLATE — house style and reusable components.
+
+  KEEPING EVERYTHING ON THE PAGE (read this):
+  The card is FLUID on screen and only locks to exact A4 in print.
+    - Never give the page a fixed width on screen; use width:100% with max-width.
+    - Every CSS grid/flex column must be able to shrink: use minmax(0, …) tracks
+      and min-width:0 on the column elements, or a long line will push content
+      off the right edge.
+    - Let long text wrap (overflow-wrap:anywhere).
+    - Columns STACK on narrow screens (phones) via the media query, then return
+      to two columns when printed. This is why nothing runs off the side.
+
+  To make a real card:
+    1. Replace title / chips / ingredients / method with the extracted content.
+    2. Duplicate <li> items as needed; lists stretch to any length.
+    3. Show macro chips ONLY if the source gives macros; otherwise delete that row.
+    4. Add .ingredient-group headings only when the recipe has sub-sections.
+    5. Use .footnote + <sup>*</sup> to flag any preserved typo/glitch.
+    6. .g is for a muted second unit (e.g. gram weights).
+  Do not invent content — see SKILL.md fidelity rules.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #2b2420;
+    --muted: #8a7d72;
+    --accent: #c4622d;        /* warm terracotta accent */
+    --accent-soft: #f6ede4;   /* tint for the ingredients panel */
+    --line: #e4d9cc;
+    --cream: #fdfaf6;         /* card background */
+  }
+  html, body {
+    background: #efe7dc; color: var(--ink);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+
+  /* FLUID on screen: full width up to an A4 cap, responsive padding. */
+  .page {
+    width: 100%; max-width: 210mm; margin: 0 auto; background: var(--cream);
+    padding: clamp(18px, 4.5vw, 15mm);
+    display: flex; flex-direction: column;
+  }
+
+  /* Header */
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 6mm; }
+  .eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+  h1 { font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(26px, 6vw, 36px);
+    line-height: 1.08; font-weight: 700; letter-spacing: -0.5px;
+    overflow-wrap: anywhere; }
+  .macros-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); margin: 12px 0 6px; }
+  .meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .chip { background: var(--accent-soft); border-radius: 999px; padding: 5px 13px;
+    font-size: 11px; color: var(--ink); }
+  .chip b { color: var(--accent); font-weight: 700; }
+
+  /* Body: ingredients + method.
+     minmax(0,…) on BOTH tracks is what lets the columns shrink instead of
+     overflowing. The gap is responsive. */
+  .body {
+    display: grid;
+    grid-template-columns: minmax(0, 66mm) minmax(0, 1fr);
+    gap: clamp(16px, 3vw, 11mm);
+    margin-top: 7mm; flex: 1;
+  }
+  .ingredients, .method { min-width: 0; }   /* critical: allow shrinking */
+
+  .section-label { font-family: Georgia, serif; font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+
+  /* Ingredients */
+  .ingredients { background: var(--accent-soft); border-radius: 8px;
+    padding: 6mm; align-self: start; }
+  .ingredient-group { font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--accent); margin: 13px 0 5px; }
+  .ingredient-group:first-of-type { margin-top: 0; }
+  .ingredients ul { list-style: none; }
+  .ingredients li { font-size: 12.5px; line-height: 1.45; padding: 5px 0 5px 18px;
+    border-bottom: 1px solid var(--line); position: relative;
+    overflow-wrap: anywhere; }
+  .ingredients li:last-child { border-bottom: none; }
+  .ingredients li::before { content: ""; position: absolute; left: 0; top: 10px;
+    width: 7px; height: 7px; border: 1.5px solid var(--accent); border-radius: 2px; }
+  .g { color: var(--muted); font-size: 11px; }                 /* second unit, e.g. grams */
+  .opt { color: var(--muted); font-style: italic; }
+
+  /* Method */
+  .method ol { list-style: none; counter-reset: step; }
+  .method li { counter-increment: step; position: relative;
+    padding: 0 0 13px 34px; font-size: 13px; line-height: 1.55;
+    overflow-wrap: anywhere; }
+  .method li::before { content: counter(step); position: absolute; left: 0; top: -1px;
+    width: 24px; height: 24px; background: var(--accent); color: #fff; border-radius: 50%;
+    font-size: 12px; font-weight: 700; display: flex; align-items: center;
+    justify-content: center; font-family: Georgia, serif; }
+  .method li:not(:last-child)::after { content: ""; position: absolute; left: 11.5px;
+    top: 26px; bottom: 4px; width: 1px; background: var(--line); }
+  .step-head { color: var(--accent); }                          /* optional bold lead-in */
+
+  /* Footnote / glitch flag */
+  .footnote { margin-top: 7px; font-size: 11px; line-height: 1.45; color: var(--muted);
+    background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: 6px; padding: 3mm 4mm; overflow-wrap: anywhere; }
+  .footnote b { color: var(--ink); }
+
+  footer { margin-top: auto; padding-top: 6mm; border-top: 1px solid var(--line);
+    font-size: 10px; color: var(--muted);
+    display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+
+  /* STACK columns on narrow screens so the checklist never runs off the side. */
+  @media (max-width: 560px) {
+    .body { grid-template-columns: 1fr; gap: 7mm; }
+  }
+
+  /* PRINT: lock to a real A4 sheet and restore two columns. */
+  @media print {
+    @page { size: A4; margin: 0; }
+    html, body { background: #fff; }
+    .page { width: 210mm; min-height: 297mm; max-width: none;
+      margin: 0; padding: 14mm 15mm 12mm; }
+    .body { grid-template-columns: minmax(0, 66mm) minmax(0, 1fr); gap: 11mm; }
+    h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Recipe</div>
+      <h1>Roast Tomato &amp; Basil Soup</h1>
+
+      <!-- Show macro chips only if the source provides macros, else delete this block -->
+      <div class="macros-label">Macros &middot; per serving</div>
+      <div class="meta">
+        <span class="chip"><b>320</b> kcal</span>
+        <span class="chip"><b>9 g</b> protein</span>
+        <span class="chip"><b>28 g</b> carbs</span>
+        <span class="chip"><b>18 g</b> fat</span>
+      </div>
+    </header>
+
+    <div class="body">
+      <aside class="ingredients">
+        <div class="section-label">Ingredients</div>
+
+        <!-- Use .ingredient-group headings only when the recipe has sub-sections -->
+        <div class="ingredient-group">For the soup</div>
+        <ul>
+          <li>1 kg ripe tomatoes, halved</li>
+          <li>1 red onion, quartered</li>
+          <li>3 garlic cloves, unpeeled</li>
+          <li>3 tbsp olive oil</li>
+          <li>500 ml vegetable stock</li>
+          <li>1 small bunch fresh basil</li>
+          <li>Salt and black pepper, to taste</li>
+        </ul>
+
+        <div class="ingredient-group">To serve <span class="opt">(optional)</span></div>
+        <ul>
+          <li>Crusty bread</li>
+        </ul>
+      </aside>
+
+      <section class="method">
+        <div class="section-label">Method</div>
+        <ol>
+          <li>Heat the oven to 200&deg;C. Spread the tomatoes, onion and garlic on a tray, drizzle with the olive oil and season well.</li>
+          <li>Roast for 35&ndash;40 minutes until soft and caramelised at the edges.</li>
+          <li>Squeeze the garlic from its skins and tip everything into a blender with the stock and most of the basil.</li>
+          <li>Blend until smooth, then reheat gently. Adjust the seasoning to taste.<sup>*</sup></li>
+          <li>Serve topped with the remaining basil and a swirl of olive oil.</li>
+        </ol>
+
+        <!-- Footnote pattern: flag a preserved typo/glitch, or any caveat -->
+        <div class="footnote"><b>*</b> Example footnote &mdash; use this component to flag a preserved spelling/autocorrect glitch from the source so the reader can substitute.</div>
+      </section>
+    </div>
+
+    <footer>
+      <span>Recipe card</span>
+      <span>Source / attribution here</span>
+    </footer>
+  </div>
+</body>
+</html>

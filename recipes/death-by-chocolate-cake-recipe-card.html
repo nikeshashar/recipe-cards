@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Death by Chocolate Cake</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #2b2420;
+    --muted: #8a7d72;
+    --accent: #6b3f2b;
+    --accent2: #c4622d;
+    --accent-soft: #f3e9e0;
+    --line: #e4d9cc;
+    --cream: #fdfaf6;
+  }
+  html, body {
+    background: #e8ddd0;
+    color: var(--ink);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    line-height: 1.5;
+  }
+  .doc {
+    width: 100%; max-width: 200mm; margin: 10mm auto; background: var(--cream);
+    padding: clamp(18px, 4.5vw, 16mm); box-shadow: 0 2px 18px rgba(0,0,0,.08);
+  }
+
+  header { border-bottom: 3px solid var(--accent2); padding-bottom: 7mm; margin-bottom: 8mm; }
+  .eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent2); font-weight: 700; margin-bottom: 7px; }
+  h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(30px, 7vw, 44px);
+    line-height: 1.04; font-weight: 700; letter-spacing: -1px; color: var(--accent); overflow-wrap: anywhere; }
+  .meta { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 14px; }
+  .chip { background: var(--accent-soft); border-radius: 999px; padding: 6px 14px;
+    font-size: 11.5px; color: var(--ink); }
+  .chip b { color: var(--accent2); font-weight: 700; }
+
+  h2 { font-family: Georgia, serif; font-size: 22px; font-weight: 700; color: var(--accent);
+    letter-spacing: -0.3px; margin: 0 0 5mm; padding-bottom: 2mm; border-bottom: 1px solid var(--line); }
+  h2:not(:first-of-type) { margin-top: 4mm; }
+  h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--accent2); margin: 0 0 7px; }
+
+  /* Ingredients */
+  .ingredients { break-inside: avoid; }
+  .ing-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 7mm 14mm; align-items: start; }
+  .ing-group { break-inside: avoid; margin-bottom: 7mm; }
+  .ing-group ul { list-style: none; }
+  .ing-group li { font-size: 13px; line-height: 1.45; padding: 5px 0 5px 17px;
+    position: relative; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+  .ing-group li::before { content: ""; position: absolute; left: 0; top: 10px;
+    width: 7px; height: 7px; border: 1.5px solid var(--accent2); border-radius: 2px; }
+  .g { color: var(--muted); font-size: 11.5px; }
+  .opt { color: var(--muted); font-style: italic; }
+
+  /* Method */
+  .method { margin-top: 4mm; }
+  .step-group { margin-bottom: 8mm; break-inside: avoid; }
+  .method ol { list-style: none; counter-reset: step; }
+  .method li { counter-increment: step; position: relative; padding: 0 0 12px 36px;
+    font-size: 13px; line-height: 1.55; break-inside: avoid; overflow-wrap: anywhere; }
+  .method li::before { content: counter(step); position: absolute; left: 0; top: -1px;
+    width: 25px; height: 25px; background: var(--accent2); color: #fff; border-radius: 50%;
+    font-size: 12px; font-weight: 700; display: flex; align-items: center;
+    justify-content: center; font-family: Georgia, serif; }
+
+  /* Tips */
+  .tips { margin-top: 4mm; background: var(--accent-soft); border-radius: 8px; padding: 7mm; break-inside: avoid; }
+  .tips ul { list-style: none; }
+  .tips li { font-size: 12.5px; line-height: 1.5; padding: 5px 0 5px 18px; position: relative; }
+  .tips li::before { content: "\2022"; position: absolute; left: 2px; top: 3px;
+    color: var(--accent2); font-weight: 700; font-size: 15px; }
+
+  footer { margin-top: 9mm; padding-top: 6mm; border-top: 1px solid var(--line);
+    font-size: 10.5px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; }
+
+  @media print {
+    @page { size: A4; margin: 14mm; }
+    html, body { background: #fff; }
+    .doc { width: 100%; margin: 0; max-width: 100%; padding: 0; box-shadow: none; }
+    h2, h3 { break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+  <div class="doc">
+    <header>
+      <div class="eyebrow">Layer Cake</div>
+      <h1>Death by Chocolate Cake</h1>
+      <div class="meta">
+        <span class="chip"><b>Oven</b> 350&deg;F / 175&deg;C</span>
+        <span class="chip"><b>Bake</b> 23&ndash;26 min</span>
+        <span class="chip"><b>Pans</b> 4 &times; 7&Prime; or 3 &times; 8&Prime;</span>
+      </div>
+    </header>
+
+    <!-- INGREDIENTS -->
+    <section class="ingredients">
+      <h2>Ingredients</h2>
+      <div class="ing-cols">
+
+        <div class="ing-group">
+          <h3>Chocolate simple syrup</h3>
+          <ul>
+            <li>1/2 cup water <span class="g">120 g</span></li>
+            <li>1/2 cup granulated sugar <span class="g">100 g</span></li>
+            <li>1 Tbsp dark or Dutch-processed cocoa powder <span class="g">6 g</span></li>
+          </ul>
+        </div>
+
+        <div class="ing-group">
+          <h3>Dark chocolate cake</h3>
+          <ul>
+            <li>2 cups all-purpose flour <span class="g">260 g</span></li>
+            <li>2 cups granulated sugar <span class="g">400 g</span></li>
+            <li>3/4 cup dark or Dutch-processed cocoa powder <span class="g">75 g</span></li>
+            <li>2 tsp baking powder <span class="g">8 g</span></li>
+            <li>1&frac12; tsp baking soda <span class="g">9 g</span></li>
+            <li>1 tsp fine salt <span class="g">6 g</span></li>
+            <li>1 cup warm water <span class="g">240 g</span></li>
+            <li>1 cup full-fat sour cream, room temp <span class="g">255 g</span></li>
+            <li>1/2 cup vegetable or canola oil <span class="g">110 g</span></li>
+            <li>2 large eggs, room temp <span class="g">112 g</span></li>
+            <li>2 tsp vanilla extract or bean paste <span class="g">8 g</span></li>
+            <li>1 tsp instant espresso or coffee <span class="opt">(optional)</span> <span class="g">1 g</span></li>
+          </ul>
+        </div>
+
+        <div class="ing-group">
+          <h3>Chocolate buttercream frosting</h3>
+          <ul>
+            <li>2 cups (4 sticks) unsalted butter, room temp <span class="g">454 g</span></li>
+            <li>1 cup dark baking cocoa, sifted <span class="g">100 g</span></li>
+            <li>1 tsp vanilla extract or bean paste <span class="g">4 g</span></li>
+            <li>1/2 tsp fine salt <span class="g">3 g</span></li>
+            <li>5 cups powdered sugar <span class="g">625 g</span></li>
+            <li>3/4 cup heavy whipping cream, room temp <span class="g">180 g</span></li>
+            <li>1&#8531; cups dark chocolate chips, melted &amp; cooled <span class="g">230 g</span></li>
+          </ul>
+        </div>
+
+        <div class="ing-group">
+          <h3>Filling &amp; decoration <span class="opt">(optional)</span></h3>
+          <ul>
+            <li>2 cups mini chocolate chips <span class="g">360 g</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- METHOD -->
+    <section class="method">
+      <h2>Method</h2>
+
+      <div class="step-group">
+        <h3>Chocolate simple syrup</h3>
+        <ol>
+          <li>Pour the water and granulated sugar into a small saucepan. Cook over medium heat, whisking continuously, until the mixture starts to boil.</li>
+          <li>Remove from the heat and whisk in 1 Tbsp dark cocoa powder. Pour into a medium bowl to cool to room temperature, then cover and set aside &mdash; this gets brushed onto the layers just before assembly. Made ahead, it keeps in an airtight container in the fridge for up to 3 weeks.</li>
+        </ol>
+      </div>
+
+      <div class="step-group">
+        <h3>Dark chocolate cake layers</h3>
+        <ol>
+          <li>Preheat the oven to 350&deg;F / 175&deg;C. Grease and line four 7-inch or three 8-inch cake pans with parchment rounds. Set aside.</li>
+          <li>Sift or whisk together the flour, sugar, cocoa powder, baking powder, baking soda and salt in a large bowl.</li>
+          <li>Add the warm water, sour cream, oil, eggs, vanilla and instant espresso to the dry ingredients and whisk together until just incorporated.</li>
+          <li>Divide the batter evenly between the prepared pans and bake for 23&ndash;26 minutes, or until a toothpick comes out with a few moist crumbs.</li>
+          <li>Remove from the oven and cool in the pans for about 15 minutes. Run an offset spatula around the rim to loosen, then flip onto wire racks to finish cooling. (In a rush? Pop the layers, pans and all, into the freezer for 30 minutes &mdash; it traps steam and keeps them extra moist.)</li>
+          <li>Once fully cooled, use a serrated knife to level the top of each layer. If making ahead, wrap and freeze them at this point.</li>
+        </ol>
+      </div>
+
+      <div class="step-group">
+        <h3>Chocolate buttercream frosting</h3>
+        <ol>
+          <li>Beat the butter on medium speed for 30 seconds with a paddle attachment, until smooth.</li>
+          <li>Add the dark cocoa powder, vanilla and salt. Mix on low until fully incorporated, scraping the sides and bottom of the bowl as needed.</li>
+          <li>Gradually mix in the powdered sugar and heavy cream on low speed.</li>
+          <li>Mix in the melted, cooled dark chocolate on low until fully incorporated and the desired consistency is reached. The chocolate should be fluid but no longer hot &mdash; let it sit about 10 minutes first. Make sure it&rsquo;s all mixed in to avoid lumps of hardened chocolate. Cover with plastic wrap to prevent crusting and set aside.</li>
+        </ol>
+      </div>
+
+      <div class="step-group">
+        <h3>Assembling the cake</h3>
+        <ol>
+          <li>Stack and frost the layers on a greaseproof cake board or flat plate, using a dab of buttercream to stick the first layer down.</li>
+          <li>Before stacking each layer, use a silicone brush to soak the top with chocolate simple syrup.</li>
+          <li>Spread an even layer of buttercream on top of each layer as you stack, using a large offset spatula. If you like, sprinkle 2&ndash;3 Tbsp mini chocolate chips over each layer of frosting for texture.</li>
+          <li>Repeat with the remaining layers, then freeze the cake for about 10 minutes &mdash; this firms the buttercream, reduces crumbing and makes frosting much easier.</li>
+          <li>Cover the cake with a thick, even layer of buttercream and smooth with a large offset spatula. Don&rsquo;t worry if it isn&rsquo;t perfectly smooth.</li>
+          <li>Carefully press mini chocolate chips into the frosting all around the cake until completely covered.</li>
+          <li>Decorate as desired &mdash; pipe leftover buttercream into swirls on top with an open star tip (e.g. Wilton 1M). Cut a big slice and enjoy. Keeps at room temperature for up to 2 days, or in the fridge for up to a week.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- TIPS -->
+    <section class="tips">
+      <h3 style="font-size:13px;">Baker&rsquo;s tips</h3>
+      <ul>
+        <li>Bring ingredients to room temperature first &mdash; they mix together far better. Set out anything cold ahead of time.</li>
+        <li>Measure flour properly (spoon into the cup, then level), or better, weigh dry ingredients with a kitchen scale.</li>
+        <li>Mix the batter just until incorporated for tender, fluffy layers.</li>
+        <li>Weigh the pans as you fill them so each has the same amount of batter and bakes to an even height.</li>
+        <li>Level room-temperature or thawed layers with a serrated knife to make stacking easier.</li>
+        <li>Chill the layers in the freezer for about 20 minutes before assembling and before adding the simple syrup &mdash; it makes stacking and frosting much easier.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <span>Bakes four 7&Prime; or three 8&Prime; layers &middot; no serving count given in source.</span>
+      <span>Recipe by Chelsweets &middot; chelsweets.com</span>
+    </footer>
+  </div>
+</body>
+</html>

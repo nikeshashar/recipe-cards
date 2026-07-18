@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creamy Bang Bang Chicken Bowl</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #2b2420;
+    --muted: #7a6f66;
+    --accent: #c4622d;
+    --accent-soft: #f6ede4;
+    --line: #e4d9cc;
+    --cream: #fdfaf6;
+  }
+  html, body {
+    background: #efe7dc;
+    color: var(--ink);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: var(--cream);
+    padding: 12mm 14mm 11mm;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 5mm; }
+  .eyebrow {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 5px;
+  }
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 34px; line-height: 1.08; font-weight: 700;
+    letter-spacing: -0.5px; max-width: 92%;
+  }
+  .meta { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 10px; }
+  .chip {
+    background: var(--accent-soft); border-radius: 999px;
+    padding: 5px 13px; font-size: 11px; color: var(--ink);
+  }
+  .chip b { color: var(--accent); font-weight: 700; }
+
+  .body { display: grid; grid-template-columns: 66mm 1fr; gap: 10mm; margin-top: 7mm; flex: 1; }
+  .section-label {
+    font-family: Georgia, serif; font-size: 15px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 8px; color: var(--ink);
+  }
+
+  .ingredients { background: var(--accent-soft); border-radius: 8px; padding: 6mm 6mm; align-self: start; }
+  .ingredient-group { font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--accent); margin: 11px 0 4px; }
+  .ingredient-group:first-of-type { margin-top: 0; }
+  .ingredients ul { list-style: none; }
+  .ingredients li {
+    font-size: 12px; line-height: 1.4; padding: 4px 0 4px 17px;
+    border-bottom: 1px solid var(--line); position: relative;
+  }
+  .ingredients li:last-child { border-bottom: none; }
+  .ingredients li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px; border: 1.5px solid var(--accent); border-radius: 2px;
+  }
+  .opt { color: var(--muted); font-style: italic; }
+
+  .method ol { list-style: none; counter-reset: step; }
+  .method li {
+    counter-increment: step; position: relative;
+    padding: 0 0 13px 32px; font-size: 13px; line-height: 1.55;
+  }
+  .method li::before {
+    content: counter(step); position: absolute; left: 0; top: -1px;
+    width: 23px; height: 23px; background: var(--accent); color: #fff;
+    border-radius: 50%; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    font-family: Georgia, serif;
+  }
+  .method li:not(:last-child)::after {
+    content: ""; position: absolute; left: 11px; top: 25px; bottom: 3px;
+    width: 1px; background: var(--line);
+  }
+  .method b.step-head { color: var(--accent); }
+
+  footer {
+    margin-top: auto; padding-top: 6mm; border-top: 1px solid var(--line);
+    font-size: 10px; color: var(--muted); display: flex; justify-content: space-between;
+  }
+
+  @media print { html, body { background: #fff; } .page { margin: 0; } }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Recipe</div>
+      <h1>Creamy Bang Bang Chicken Bowl</h1>
+      <div class="meta">
+        <span class="chip"><b>Serves</b> 4</span>
+      </div>
+    </header>
+
+    <div class="body">
+      <aside class="ingredients">
+        <div class="section-label">Ingredients</div>
+
+        <div class="ingredient-group">For the chicken</div>
+        <ul>
+          <li>1 lb chicken thighs, finely diced</li>
+          <li>1/2 tsp avocado oil</li>
+          <li>1 tbsp soy sauce</li>
+          <li>Salt and pepper</li>
+          <li>1 tbsp garlic powder</li>
+          <li>1 tbsp onion powder</li>
+          <li>1 tbsp smoked paprika</li>
+          <li>Juice of half a large lime</li>
+          <li>1/2 tbsp powdered monkfruit or sweetener</li>
+          <li><span class="opt">Optional:</span> 1 tbsp gluten free flour or cornstarch</li>
+        </ul>
+
+        <div class="ingredient-group">For the base</div>
+        <ul>
+          <li>Kaizen high protein lowcarb rice (or any rice you like)</li>
+        </ul>
+
+        <div class="ingredient-group">For the cucumber cabbage slaw</div>
+        <ul>
+          <li>1/4 head cabbage, thinly shredded</li>
+          <li>3&ndash;4 Persian cucumbers, thinly sliced</li>
+          <li>1 carrot, thinly shredded</li>
+          <li>3 scallions, finely sliced</li>
+          <li>1 jalape&ntilde;o, thinly sliced (seeds removed if you like)</li>
+          <li>Large handful cilantro, roughly chopped</li>
+          <li>1 tbsp sesame oil</li>
+          <li>3 tbsp rice vinegar</li>
+          <li>2 tbsp tamari or soy sauce</li>
+          <li>Pinch of salt and pepper</li>
+          <li>1 tbsp toasted sesame seeds</li>
+        </ul>
+
+        <div class="ingredient-group">For the creamy bang bang sauce</div>
+        <ul>
+          <li>3 tbsp mayo</li>
+          <li>2 tbsp sriracha</li>
+          <li>1.5 tbsp unsweetened ketchup</li>
+          <li>Juice of half a lime</li>
+          <li>1/4 tsp cayenne pepper</li>
+          <li>1/2 tsp powdered monkfruit</li>
+          <li>2 tbsp water, to thin if you wish</li>
+        </ul>
+
+        <div class="ingredient-group">To serve</div>
+        <ul>
+          <li>Fresh cilantro</li>
+          <li>Sesame seeds</li>
+        </ul>
+      </aside>
+
+      <section class="method">
+        <div class="section-label">Method</div>
+        <ol>
+          <li><b class="step-head">Chicken.</b> Finely dice the chicken thighs into small pieces. Add to a bowl, drizzle with the avocado oil and soy sauce, and season with salt, pepper, garlic powder, onion powder, smoked paprika, the lime juice, the monkfruit, and the optional flour or cornstarch. Mix well, then bake at 400&deg;F for 32 mins, or air-fry at 400&deg;F for 22 mins.</li>
+          <li><b class="step-head">Base.</b> For the base, use Kaizen high protein lowcarb rice, or any rice you like.</li>
+          <li><b class="step-head">Slaw.</b> Thinly shred the cabbage with a mandolin and add to a bowl with the Persian cucumbers, carrot, scallions, jalape&ntilde;o (remove seeds if you like) and cilantro. Add the sesame oil, rice vinegar, tamari or soy sauce, and a pinch of salt and pepper. Mix really well, then taste and adjust. Stir in the toasted sesame seeds for a nice crunch.</li>
+          <li><b class="step-head">Bang bang sauce.</b> Mix together the mayo, sriracha, unsweetened ketchup, lime juice, cayenne pepper and powdered monkfruit. Mix well, taste, and add 2 tbsp water to thin the sauce if you wish.</li>
+          <li><b class="step-head">Assemble.</b> Divide into 4 servings. For each, plate up 1 serving of rice as the base, then add 4 oz cooked chicken and a cup of slaw. Drizzle with some of the sauce and top with fresh cilantro and sesame seeds.</li>
+        </ol>
+      </section>
+    </div>
+
+    <footer>
+      <span>Recipe card</span>
+      <span>Recipe by @shredhappens</span>
+    </footer>
+  </div>
+</body>
+</html>
