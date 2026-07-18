@@ -5,3 +5,4 @@
 - [Hosting](recipe-cards-hosting.md) — public repo nikeshashar/recipe-cards (personal account), Pages from main/root
 - [Index categories](recipe-cards-index-categories.md) — filter chips via data-tags; marinades split per-recipe, data-sub hides them from All view
 - [Memory in repo](recipe-cards-memory-in-repo.md) — memory lives at .claude/memory/ in the repo (public!), harness path is a symlink
+- [Art Deco style](recipe-cards-art-deco-style.md) — obsidian/gold house style everywhere, cards print dark by explicit choice; don't revert

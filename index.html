@@ -4,61 +4,115 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recipe Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Marcellus&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --ink: #2b2420;
-    --muted: #8a7d72;
-    --accent: #c4622d;
-    --accent-soft: #f6ede4;
-    --line: #e4d9cc;
-    --cream: #fdfaf6;
+    --bg: #0A0A0A;          /* obsidian */
+    --panel: #141414;       /* rich charcoal */
+    --ink: #F2F0E4;         /* champagne cream */
+    --muted: #8F8F8F;       /* pewter */
+    --accent: #D4AF37;      /* metallic gold */
+    --accent-bright: #F2E8C4;
+    --line: rgba(212, 175, 55, 0.3);
   }
   html, body {
-    background: #efe7dc; color: var(--ink);
-    font-family: "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 90% 55% at 50% -5%, rgba(212, 175, 55, 0.14), transparent 70%),
+      repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.035) 0 1px, transparent 1px 16px),
+      repeating-linear-gradient(-45deg, rgba(212, 175, 55, 0.035) 0 1px, transparent 1px 16px);
+    color: var(--ink);
+    font-family: "Josefin Sans", Futura, "Century Gothic", "Trebuchet MS", sans-serif;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
   .page {
-    width: 100%; max-width: 210mm; margin: 0 auto; min-height: 100vh;
-    background: var(--cream); padding: clamp(18px, 4.5vw, 15mm);
+    width: 100%; max-width: 72rem; margin: 0 auto; min-height: 100vh;
+    padding: clamp(28px, 6vw, 72px) clamp(18px, 4.5vw, 48px) clamp(24px, 5vw, 48px);
     display: flex; flex-direction: column;
   }
 
-  header { border-bottom: 2px solid var(--accent); padding-bottom: 6mm; margin-bottom: 6mm; }
-  h1 { font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(28px, 6.5vw, 40px);
-    line-height: 1.08; font-weight: 700; letter-spacing: -0.5px; overflow-wrap: anywhere; }
-
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-  .filter {
-    font-family: inherit; font-size: 12px; font-weight: 700; letter-spacing: .5px;
-    color: var(--ink); background: var(--cream); border: 1px solid var(--line);
-    border-radius: 999px; padding: 7px 16px; cursor: pointer;
-    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  header { text-align: center; margin-bottom: clamp(28px, 5vw, 56px); }
+  .ornament {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    margin: 14px 0;
   }
-  .filter:hover { border-color: var(--accent); color: var(--accent); }
-  .filter.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .ornament .rule { height: 1px; width: clamp(48px, 12vw, 96px); background: var(--accent); }
+  .ornament .diamond {
+    width: 7px; height: 7px; border: 1px solid var(--accent);
+    transform: rotate(45deg); background: transparent;
+  }
+  .ornament .diamond.filled { background: var(--accent); }
+  h1 {
+    font-family: "Marcellus", Georgia, "Times New Roman", serif;
+    font-size: clamp(30px, 7vw, 60px); font-weight: 400;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--accent); line-height: 1.1; overflow-wrap: anywhere;
+    text-shadow: 0 0 24px rgba(212, 175, 55, 0.25);
+  }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
-    gap: 14px; }
-  a.card { display: flex; flex-direction: column; gap: 8px; min-width: 0;
-    background: var(--accent-soft); border-radius: 10px; padding: 16px 16px 14px;
+  /* TYPE FILTERS — precision instruments, not soft pills. */
+  .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    margin-bottom: clamp(28px, 5vw, 48px); }
+  .filter {
+    font-family: inherit; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); background: transparent;
+    border: 1px solid var(--line); border-radius: 0;
+    padding: 14px 22px 12px; cursor: pointer;
+    transition: all .3s ease-out;
+  }
+  .filter:hover { border-color: var(--accent); box-shadow: 0 0 15px rgba(212, 175, 55, 0.25); }
+  .filter.active {
+    background: var(--accent); border-color: var(--accent); color: #0A0A0A;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  }
+  .filter:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 24px; }
+  a.card {
+    position: relative;
+    display: flex; flex-direction: column; gap: 10px; min-width: 0;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 0;
+    padding: 26px 22px 20px;
     text-decoration: none; color: var(--ink);
-    border: 1px solid transparent; transition: border-color .15s ease, transform .15s ease; }
-  a.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    transition: border-color .5s ease-out, transform .5s ease-out, box-shadow .5s ease-out;
+  }
+  a.card::before, a.card::after {
+    content: ""; position: absolute; width: 16px; height: 16px;
+    opacity: .5; transition: opacity .5s ease-out; pointer-events: none;
+  }
+  a.card::before { top: 6px; left: 6px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+  a.card::after { bottom: 6px; right: 6px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+  a.card:hover, a.card:focus-visible {
+    border-color: var(--accent); transform: translateY(-6px);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+  }
+  a.card:hover::before, a.card:hover::after,
+  a.card:focus-visible::before, a.card:focus-visible::after { opacity: 1; }
+  a.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   a.card[hidden] { display: none; }
-  .card .kind { font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--accent); font-weight: 700; }
-  .card h2 { font-family: Georgia, serif; font-size: 19px; line-height: 1.15;
-    font-weight: 700; letter-spacing: -0.2px; overflow-wrap: anywhere; }
-  .card .desc { font-size: 12px; line-height: 1.45; color: var(--muted); overflow-wrap: anywhere; }
-  .card .src { margin-top: auto; padding-top: 8px; font-size: 10.5px; color: var(--muted);
-    border-top: 1px solid var(--line); }
+  .card .kind { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; }
+  .card h2 {
+    font-family: "Marcellus", Georgia, serif; font-size: 19px; line-height: 1.3;
+    font-weight: 400; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--accent); overflow-wrap: anywhere;
+  }
+  .card .desc { font-size: 13px; line-height: 1.55; color: var(--muted);
+    font-weight: 300; overflow-wrap: anywhere; }
+  .card .src { margin-top: auto; padding-top: 10px; font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    border-top: 1px solid rgba(212, 175, 55, 0.18); }
 
-  footer { margin-top: auto; padding-top: 8mm; font-size: 10.5px; color: var(--muted);
-    border-top: 1px solid var(--line); display: flex; justify-content: space-between;
-    gap: 10px; flex-wrap: wrap; margin-top: 10mm; }
+  footer {
+    margin-top: auto; padding-top: clamp(28px, 5vw, 48px);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+  }
 
   @media print { .filters { display: none; } }
 </style>
@@ -66,7 +120,13 @@
 <body>
   <div class="page">
     <header>
+      <div class="ornament" aria-hidden="true">
+        <span class="rule"></span><span class="diamond"></span><span class="rule"></span>
+      </div>
       <h1>Recipe Cards</h1>
+      <div class="ornament" aria-hidden="true">
+        <span class="rule"></span><span class="diamond filled"></span><span class="rule"></span>
+      </div>
     </header>
 
     <!-- TYPE FILTERS
@@ -118,35 +178,35 @@
       </a>
 
       <a class="card" href="recipes/hot-honey-harissa-marinade-recipe-card.html" data-tags="marinades" data-sub="marinades">
-        <span class="kind">Chicken marinade &middot; 01</span>
+        <span class="kind">Chicken marinade &middot; No. I</span>
         <h2>Hot Honey Harissa</h2>
         <span class="desc">Harissa, honey, smoked paprika, and warm spices with lemon. For 6 chicken thighs.</span>
         <span class="src">@seemagetsbaked</span>
       </a>
 
       <a class="card" href="recipes/cilantro-lime-chicken-marinade-recipe-card.html" data-tags="marinades" data-sub="marinades">
-        <span class="kind">Chicken marinade &middot; 02</span>
+        <span class="kind">Chicken marinade &middot; No. II</span>
         <h2>Cilantro Lime Chicken</h2>
         <span class="desc">Fresh cilantro, lime juice and zest, Greek yogurt, chili and cumin. For 6 chicken thighs.</span>
         <span class="src">@seemagetsbaked</span>
       </a>
 
       <a class="card" href="recipes/sweet-spicy-korean-marinade-recipe-card.html" data-tags="marinades" data-sub="marinades">
-        <span class="kind">Chicken marinade &middot; 03</span>
+        <span class="kind">Chicken marinade &middot; No. III</span>
         <h2>Sweet &amp; Spicy Korean</h2>
         <span class="desc">Gochujang, gochugaru, soy, oyster sauce, and sesame. Scaled &times;1.5 for 6 thighs.</span>
         <span class="src">@seemagetsbaked</span>
       </a>
 
       <a class="card" href="recipes/sorta-somali-suqaar-marinade-recipe-card.html" data-tags="marinades" data-sub="marinades">
-        <span class="kind">Chicken marinade &middot; 04</span>
+        <span class="kind">Chicken marinade &middot; No. IV</span>
         <h2>Sorta Somali Suqaar</h2>
         <span class="desc">Xawaash spice, sweet onion, paprika, and cayenne for diced chicken and onion. For 6 thighs.</span>
         <span class="src">@seemagetsbaked</span>
       </a>
 
       <a class="card" href="recipes/teriyaki-marinade-recipe-card.html" data-tags="marinades" data-sub="marinades">
-        <span class="kind">Chicken marinade &middot; 05</span>
+        <span class="kind">Chicken marinade &middot; No. V</span>
         <h2>Teriyaki</h2>
         <span class="desc">Soy, honey, brown sugar, sesame, garlic, and ginger. Scaled &times;1.5 for 6 thighs.</span>
         <span class="src">@seemagetsbaked</span>
@@ -162,7 +222,11 @@
     </div>
 
     <footer>
-      <span>9 recipes</span>
+      <div class="ornament" aria-hidden="true">
+        <span class="rule" style="width:40px;"></span><span class="diamond"></span><span class="rule" style="width:40px;"></span>
+      </div>
+      <!-- Recipe count in Roman numerals (currently 9 = IX). Bump when adding recipes. -->
+      <span>IX Recipes</span>
     </footer>
   </div>
 

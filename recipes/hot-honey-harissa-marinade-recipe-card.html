@@ -5,107 +5,140 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hot Honey Harissa — Chicken Marinade</title>
 <style>
-  @page { size: A4; margin: 0; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --ink: #2b2420;
-    --muted: #7a6f66;
-    --accent: #c4622d;
-    --accent-soft: #f6ede4;
-    --line: #e4d9cc;
-    --cream: #fdfaf6;
+    --bg: #0A0A0A;                          /* obsidian */
+    --cream: #101010;                       /* card sheet (name kept for house convention) */
+    --accent-soft: #141414;                 /* charcoal panel (name kept) */
+    --ink: #F2F0E4;                         /* champagne cream */
+    --muted: #8F8F8F;                       /* pewter */
+    --accent: #D4AF37;                      /* metallic gold */
+    --accent-bright: #F2E8C4;
+    --line: rgba(212, 175, 55, 0.3);
+    --line-soft: rgba(212, 175, 55, 0.14);
+    --font-display: "Marcellus", Georgia, "Times New Roman", serif;
+    --font-body: "Josefin Sans", Futura, "Century Gothic", "Trebuchet MS", sans-serif;
   }
   html, body {
-    background: #efe7dc;
+    background-color: var(--bg);
+    background-image:
+      repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.035) 0 1px, transparent 1px 16px),
+      repeating-linear-gradient(-45deg, rgba(212, 175, 55, 0.035) 0 1px, transparent 1px 16px);
     color: var(--ink);
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    font-family: var(--font-body);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
+
+  .eyebrow { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+  h1 { font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(24px, 5.5vw, 34px); line-height: 1.15;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--accent); overflow-wrap: anywhere; }
+  .macros-label { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin: 12px 0 6px; }
+  .meta { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+  .meta + .macros-label { margin-top: 10px; }
+  .chip { background: transparent; border: 1px solid var(--line); border-radius: 0;
+    padding: 6px 13px 5px; font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink); }
+  .chip b { color: var(--accent); font-weight: 600; }
+
+  .section-label { font-family: var(--font-display); font-size: 14px; font-weight: 400;
+    text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent);
+    margin-bottom: 10px; }
+  .ingredient-group { font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--accent); margin: 13px 0 5px; }
+  .ingredient-group:first-of-type { margin-top: 0; }
+
+  .ingredients { background: var(--accent-soft); border: 1px solid var(--line);
+    border-radius: 0; position: relative; }
+  .ingredients::before, .ingredients::after {
+    content: ""; position: absolute; width: 14px; height: 14px; pointer-events: none; }
+  .ingredients::before { top: 4px; left: 4px;
+    border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+  .ingredients::after { bottom: 4px; right: 4px;
+    border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+  .ingredients ul { list-style: none; }
+  .ingredients li { font-size: 12.5px; line-height: 1.45; padding: 5px 0 5px 18px;
+    border-bottom: 1px solid var(--line-soft); position: relative;
+    overflow-wrap: anywhere; }
+  .ingredients li:last-child { border-bottom: none; }
+  .ingredients li::before { content: ""; position: absolute; left: 1px; top: 10px;
+    width: 6px; height: 6px; border: 1.5px solid var(--accent);
+    transform: rotate(45deg); }
+  .opt { color: var(--muted); font-style: italic; }
+  .g { color: var(--muted); font-size: 11px; }
+
+  footer { margin-top: auto; padding-top: 6mm; border-top: 1px solid var(--line);
+    font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); display: flex; justify-content: space-between;
+    gap: 10px; flex-wrap: wrap; }
+  .fn { font-style: italic; }
+
   .page {
-    width: 100%;
-    max-width: 210mm;
-    min-height: 100vh;
-    margin: 0 auto;
-    background: var(--cream);
-    padding: clamp(18px, 4.5vw, 16mm);
-    display: flex;
-    flex-direction: column;
+    width: 100%; max-width: 210mm; margin: 0 auto; min-height: 100vh;
+    background-color: var(--cream);
+    background-image:
+      linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)),
+      linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)),
+      linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)),
+      linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent));
+    background-size: 22px 2px, 2px 22px, 22px 2px, 2px 22px, 22px 2px, 2px 22px, 22px 2px, 2px 22px;
+    background-position: top left, top left, top right, top right,
+      bottom left, bottom left, bottom right, bottom right;
+    background-repeat: no-repeat;
+    border: 1px solid var(--line);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+    padding: clamp(18px, 4.5vw, 15mm);
+    display: flex; flex-direction: column;
+    position: relative;
   }
+  .page > * { position: relative; }
+  .page::before { content: ""; position: absolute; inset: 7px;
+    border: 1px solid var(--line-soft); pointer-events: none; }
 
-  header { border-bottom: 2px solid var(--accent); padding-bottom: 6mm; }
-  .eyebrow {
-    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--accent); font-weight: 700; margin-bottom: 6px;
-  }
-  h1 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(26px, 6vw, 36px); line-height: 1.08; font-weight: 700;
-    letter-spacing: -0.5px; overflow-wrap: anywhere;
-  }
-  .meta { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 11px; }
-  .chip {
-    background: var(--accent-soft); border-radius: 999px;
-    padding: 5px 13px; font-size: 11px; color: var(--ink);
-  }
-  .chip b { color: var(--accent); font-weight: 700; }
+  header { text-align: center; border-bottom: 2px solid var(--accent); padding-bottom: 6mm; }
 
-  .section-label {
-    font-family: Georgia, serif; font-size: 16px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 11px;
-  }
+  .method ol, .use ol { list-style: none; counter-reset: step; }
+  .method li, .use li { counter-increment: step; position: relative;
+    padding: 0 0 12px 34px; font-size: 13px; line-height: 1.55;
+    overflow-wrap: anywhere; }
+  .method li::before, .use li::before { content: counter(step);
+    position: absolute; left: 0; top: -1px;
+    width: 24px; height: 24px; background: var(--accent); color: #0A0A0A;
+    border-radius: 0; font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); }
+  .method li:not(:last-child)::after { content: ""; position: absolute; left: 11.5px;
+    top: 27px; bottom: 4px; width: 1px; background: var(--line-soft); }
+  .step-head { color: var(--accent); font-weight: 600; }
 
-  .ingredients {
-    background: var(--accent-soft); border-radius: 8px;
-    padding: clamp(14px, 3vw, 8mm); margin-top: 8mm;
-  }
+  .footnote, .swap-note, .note { margin-top: 8px; font-size: 11px; line-height: 1.5;
+    color: var(--muted); background: var(--accent-soft);
+    border: 1px solid var(--line-soft); border-left: 3px solid var(--accent);
+    border-radius: 0; padding: 3mm 4mm; overflow-wrap: anywhere; }
+  .footnote b, .swap-note b, .note b { color: var(--ink); }
+  .serve { margin-top: 6px; background: var(--accent-soft); border: 1px solid var(--line-soft);
+    border-radius: 0; padding: 4mm 5mm; font-size: 12px; line-height: 1.5;
+    overflow-wrap: anywhere; }
+  .serve b { color: var(--accent); }
+
+  .ingredients { padding: clamp(14px, 3vw, 8mm); margin-top: 8mm; }
   .ingredients ul {
-    list-style: none; display: grid;
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
     column-gap: 12mm;
   }
-  .ingredients li {
-    font-size: 13px; line-height: 1.45; padding: 6px 0 6px 18px;
-    position: relative; break-inside: avoid; border-bottom: 1px solid var(--line);
-    overflow-wrap: anywhere;
-  }
-  .ingredients li::before {
-    content: ""; position: absolute; left: 0; top: 11px;
-    width: 7px; height: 7px; border: 1.5px solid var(--accent); border-radius: 2px;
-  }
-  .ingredients li.chicken { font-weight: 700; }
-  .opt { color: var(--muted); font-style: italic; }
-
+  .ingredients li { break-inside: avoid; }
+  .ingredients li.chicken { font-weight: 600; color: var(--accent-bright); }
   .use { margin-top: 8mm; }
-  .use ol { list-style: none; counter-reset: step; }
-  .use li {
-    counter-increment: step; position: relative;
-    padding: 0 0 10px 32px; font-size: 13px; line-height: 1.55;
-    overflow-wrap: anywhere;
-  }
-  .use li::before {
-    content: counter(step); position: absolute; left: 0; top: -1px;
-    width: 23px; height: 23px; background: var(--accent); color: #fff;
-    border-radius: 50%; font-size: 12px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center; font-family: Georgia, serif;
-  }
-
-  .note {
-    margin-top: 7mm; background: #fff; border: 1px solid var(--line);
-    border-left: 3px solid var(--accent); border-radius: 6px;
-    padding: 4mm 5mm; font-size: 11.5px; line-height: 1.5; color: var(--muted);
-  }
-  .note b { color: var(--ink); }
-
-  footer {
-    margin-top: auto; padding-top: 7mm; border-top: 1px solid var(--line);
-    font-size: 10px; color: var(--muted); display: flex; justify-content: space-between;
-    gap: 10px; flex-wrap: wrap;
-  }
 
   @media print {
-    html, body { background: #fff; }
-    .page { width: 210mm; min-height: 297mm; margin: 0; padding: 16mm 16mm 13mm; }
+    @page { size: A4; margin: 0; }
+    html, body { background-color: var(--bg); }
+    .page { width: 210mm; min-height: 297mm; max-width: none;
+      margin: 0 auto; padding: 16mm 16mm 13mm; box-shadow: none; }
   }
 </style>
 </head>
@@ -113,7 +146,7 @@
 
   <div class="page">
     <header>
-      <div class="eyebrow">Chicken Marinade &middot; 01</div>
+      <div class="eyebrow">Chicken Marinade &middot; No. I</div>
       <h1>Hot Honey Harissa</h1>
       <div class="meta"><span class="chip"><b>For</b> 6 chicken thighs</span></div>
     </header>
