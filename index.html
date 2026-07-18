@@ -25,13 +25,23 @@
     display: flex; flex-direction: column;
   }
 
-  header { border-bottom: 2px solid var(--accent); padding-bottom: 6mm; margin-bottom: 8mm; }
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 6mm; margin-bottom: 6mm; }
   .eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
     color: var(--accent); font-weight: 700; margin-bottom: 6px; }
   h1 { font-family: Georgia, "Times New Roman", serif;
     font-size: clamp(28px, 6.5vw, 40px);
     line-height: 1.08; font-weight: 700; letter-spacing: -0.5px; overflow-wrap: anywhere; }
   .sub { margin-top: 8px; font-size: 13px; color: var(--muted); }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .filter {
+    font-family: inherit; font-size: 12px; font-weight: 700; letter-spacing: .5px;
+    color: var(--ink); background: var(--cream); border: 1px solid var(--line);
+    border-radius: 999px; padding: 7px 16px; cursor: pointer;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .filter:hover { border-color: var(--accent); color: var(--accent); }
+  .filter.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
     gap: 14px; }
@@ -40,6 +50,7 @@
     text-decoration: none; color: var(--ink);
     border: 1px solid transparent; transition: border-color .15s ease, transform .15s ease; }
   a.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  a.card[hidden] { display: none; }
   .card .kind { font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase;
     color: var(--accent); font-weight: 700; }
   .card h2 { font-family: Georgia, serif; font-size: 19px; line-height: 1.15;
@@ -51,6 +62,8 @@
   footer { margin-top: auto; padding-top: 8mm; font-size: 10.5px; color: var(--muted);
     border-top: 1px solid var(--line); display: flex; justify-content: space-between;
     gap: 10px; flex-wrap: wrap; margin-top: 10mm; }
+
+  @media print { .filters { display: none; } }
 </style>
 </head>
 <body>
@@ -58,43 +71,93 @@
     <header>
       <div class="eyebrow">Directory</div>
       <h1>Recipe Cards</h1>
-      <div class="sub">Recipe screenshots turned into clean, printable cards. Tap any card to open it; use your browser&rsquo;s print dialog to save as PDF.</div>
+      <div class="sub">Recipe screenshots turned into clean, printable cards. Pick a type below, tap any card to open it, and use your browser&rsquo;s print dialog to save as PDF.</div>
     </header>
+
+    <!-- TYPE FILTERS
+         Each button's data-filter matches the data-tags on the cards below.
+         To add a new type (e.g. Indian), add a button here and tag the cards. -->
+    <nav class="filters" aria-label="Recipe type">
+      <button class="filter active" data-filter="all">All</button>
+      <button class="filter" data-filter="chicken">Chicken</button>
+      <button class="filter" data-filter="bowls">Bowls</button>
+      <button class="filter" data-filter="marinades">Marinades</button>
+      <button class="filter" data-filter="desserts">Desserts</button>
+    </nav>
 
     <!-- RECIPE LIST
          To add a new recipe: copy one <a class="card"> block, update the href
-         (file lives in recipes/), title, description, and source. Newest first. -->
+         (file lives in recipes/), title, description, and source. Newest first.
+         data-tags: space-separated types (must match a filter button's data-filter).
+         data-sub="<tag>": card only appears when that type is selected, not in
+         "All" — used for the per-marinade cards that also exist in one combined
+         printable file. -->
     <div class="grid">
 
-      <a class="card" href="recipes/chicken-shawarma-recipe-card.html">
+      <a class="card" href="recipes/chicken-shawarma-recipe-card.html" data-tags="chicken">
         <span class="kind">Freezer meal prep</span>
         <h2>Chicken Shawarma</h2>
         <span class="desc">Greek-yogurt marinated, freezer-friendly, 8 servings. 367 kcal / 55 g protein per serving.</span>
         <span class="src">@shreddedandfed</span>
       </a>
 
-      <a class="card" href="recipes/death-by-chocolate-cake-recipe-card.html">
+      <a class="card" href="recipes/death-by-chocolate-cake-recipe-card.html" data-tags="desserts">
         <span class="kind">Layer cake</span>
         <h2>Death by Chocolate Cake</h2>
         <span class="desc">Dark chocolate layers, chocolate buttercream, chocolate simple syrup &mdash; full multi-component bake with gram weights.</span>
         <span class="src">Chelsweets &middot; chelsweets.com</span>
       </a>
 
-      <a class="card" href="recipes/chilli-lime-chicken-corn-bowl-recipe-card.html">
+      <a class="card" href="recipes/chilli-lime-chicken-corn-bowl-recipe-card.html" data-tags="chicken bowls">
         <span class="kind">High-protein bowl</span>
         <h2>Chilli Lime Chicken &amp; Charred Corn Bowl</h2>
         <span class="desc">Marinated chicken, elote-style corn salad, creamy yogurt sauce. 475 kcal / 58 g protein per serving.</span>
         <span class="src">@louishowardpt &middot; adapted from @amateurprochef</span>
       </a>
 
-      <a class="card" href="recipes/chicken-marinades-recipe-cards.html">
-        <span class="kind">Marinades &middot; 5 cards</span>
+      <a class="card" href="recipes/chicken-marinades-recipe-cards.html" data-tags="chicken marinades">
+        <span class="kind">Marinades &middot; all 5 in one file</span>
         <h2>Chicken Marinades</h2>
-        <span class="desc">Hot Honey Harissa, Cilantro Lime, Sweet &amp; Spicy Korean, Sorta Somali Suqaar, and Teriyaki &mdash; scaled for 6 thighs.</span>
+        <span class="desc">Hot Honey Harissa, Cilantro Lime, Sweet &amp; Spicy Korean, Sorta Somali Suqaar, and Teriyaki &mdash; scaled for 6 thighs, one card per printed page.</span>
         <span class="src">@seemagetsbaked</span>
       </a>
 
-      <a class="card" href="recipes/bang-bang-chicken-bowl-recipe-card.html">
+      <a class="card" href="recipes/hot-honey-harissa-marinade-recipe-card.html" data-tags="marinades" data-sub="marinades">
+        <span class="kind">Chicken marinade &middot; 01</span>
+        <h2>Hot Honey Harissa</h2>
+        <span class="desc">Harissa, honey, smoked paprika, and warm spices with lemon. For 6 chicken thighs.</span>
+        <span class="src">@seemagetsbaked</span>
+      </a>
+
+      <a class="card" href="recipes/cilantro-lime-chicken-marinade-recipe-card.html" data-tags="marinades" data-sub="marinades">
+        <span class="kind">Chicken marinade &middot; 02</span>
+        <h2>Cilantro Lime Chicken</h2>
+        <span class="desc">Fresh cilantro, lime juice and zest, Greek yogurt, chili and cumin. For 6 chicken thighs.</span>
+        <span class="src">@seemagetsbaked</span>
+      </a>
+
+      <a class="card" href="recipes/sweet-spicy-korean-marinade-recipe-card.html" data-tags="marinades" data-sub="marinades">
+        <span class="kind">Chicken marinade &middot; 03</span>
+        <h2>Sweet &amp; Spicy Korean</h2>
+        <span class="desc">Gochujang, gochugaru, soy, oyster sauce, and sesame. Scaled &times;1.5 for 6 thighs.</span>
+        <span class="src">@seemagetsbaked</span>
+      </a>
+
+      <a class="card" href="recipes/sorta-somali-suqaar-marinade-recipe-card.html" data-tags="marinades" data-sub="marinades">
+        <span class="kind">Chicken marinade &middot; 04</span>
+        <h2>Sorta Somali Suqaar</h2>
+        <span class="desc">Xawaash spice, sweet onion, paprika, and cayenne for diced chicken and onion. For 6 thighs.</span>
+        <span class="src">@seemagetsbaked</span>
+      </a>
+
+      <a class="card" href="recipes/teriyaki-marinade-recipe-card.html" data-tags="marinades" data-sub="marinades">
+        <span class="kind">Chicken marinade &middot; 05</span>
+        <h2>Teriyaki</h2>
+        <span class="desc">Soy, honey, brown sugar, sesame, garlic, and ginger. Scaled &times;1.5 for 6 thighs.</span>
+        <span class="src">@seemagetsbaked</span>
+      </a>
+
+      <a class="card" href="recipes/bang-bang-chicken-bowl-recipe-card.html" data-tags="chicken bowls">
         <span class="kind">High-protein bowl</span>
         <h2>Creamy Bang Bang Chicken Bowl</h2>
         <span class="desc">Spiced chicken, cucumber cabbage slaw, and creamy bang bang sauce over lowcarb rice. Serves 4.</span>
@@ -105,8 +168,35 @@
 
     <footer>
       <span>Cards generated by the recipe-card Claude skill.</span>
-      <span>5 recipes</span>
+      <span>9 recipes</span>
     </footer>
   </div>
+
+  <script>
+    (function () {
+      var chips = Array.prototype.slice.call(document.querySelectorAll('.filter'));
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.grid a.card'));
+
+      function apply(f) {
+        chips.forEach(function (c) { c.classList.toggle('active', c.dataset.filter === f); });
+        cards.forEach(function (card) {
+          var tags = (card.dataset.tags || '').split(/\s+/);
+          var show = f === 'all' ? !card.hasAttribute('data-sub') : tags.indexOf(f) !== -1;
+          if (show) { card.removeAttribute('hidden'); } else { card.setAttribute('hidden', ''); }
+        });
+      }
+
+      chips.forEach(function (c) {
+        c.addEventListener('click', function () {
+          var f = c.dataset.filter;
+          history.replaceState(null, '', f === 'all' ? location.pathname + location.search : '#' + f);
+          apply(f);
+        });
+      });
+
+      var initial = location.hash.slice(1);
+      apply(chips.some(function (c) { return c.dataset.filter === initial; }) ? initial : 'all');
+    })();
+  </script>
 </body>
 </html>

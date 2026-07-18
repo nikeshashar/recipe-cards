@@ -36,7 +36,8 @@ python3 -m scripts.package_skill /path/to/repo/skill/recipe-card /path/to/repo/s
 
 1. Drop the self-contained card into `recipes/` (naming: `<dish-name>-recipe-card.html`).
 2. In `index.html`, copy an `<a class="card">` block near the top of `.grid` (newest first — a comment in the file shows the pattern) and update href/kind/title/desc/source.
-3. Bump the recipe count in the `index.html` footer.
+3. Set `data-tags` on the block to its recipe types (space-separated, matching the `data-filter` values of the chips in `.filters`; add a new chip there if the recipe introduces a new type). Cards with `data-sub="<tag>"` appear only when that type's chip is selected, not under "All" — used for recipes that also exist inside a combined multi-card file, so the combined card represents them in the "All" view.
+4. Bump the recipe count in the `index.html` footer (count recipes, not files — a combined file and its per-recipe splits count once).
 
 ## Card conventions
 

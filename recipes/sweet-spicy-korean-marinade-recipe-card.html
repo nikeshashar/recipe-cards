@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet &amp; Spicy Korean — Chicken Marinade</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #2b2420;
+    --muted: #7a6f66;
+    --accent: #c4622d;
+    --accent-soft: #f6ede4;
+    --line: #e4d9cc;
+    --cream: #fdfaf6;
+  }
+  html, body {
+    background: #efe7dc;
+    color: var(--ink);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 100%;
+    max-width: 210mm;
+    min-height: 100vh;
+    margin: 0 auto;
+    background: var(--cream);
+    padding: clamp(18px, 4.5vw, 16mm);
+    display: flex;
+    flex-direction: column;
+  }
+
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 6mm; }
+  .eyebrow {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 6px;
+  }
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(26px, 6vw, 36px); line-height: 1.08; font-weight: 700;
+    letter-spacing: -0.5px; overflow-wrap: anywhere;
+  }
+  .meta { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 11px; }
+  .chip {
+    background: var(--accent-soft); border-radius: 999px;
+    padding: 5px 13px; font-size: 11px; color: var(--ink);
+  }
+  .chip b { color: var(--accent); font-weight: 700; }
+
+  .section-label {
+    font-family: Georgia, serif; font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 11px;
+  }
+
+  .ingredients {
+    background: var(--accent-soft); border-radius: 8px;
+    padding: clamp(14px, 3vw, 8mm); margin-top: 8mm;
+  }
+  .ingredients ul {
+    list-style: none; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+    column-gap: 12mm;
+  }
+  .ingredients li {
+    font-size: 13px; line-height: 1.45; padding: 6px 0 6px 18px;
+    position: relative; break-inside: avoid; border-bottom: 1px solid var(--line);
+    overflow-wrap: anywhere;
+  }
+  .ingredients li::before {
+    content: ""; position: absolute; left: 0; top: 11px;
+    width: 7px; height: 7px; border: 1.5px solid var(--accent); border-radius: 2px;
+  }
+  .ingredients li.chicken { font-weight: 700; }
+  .opt { color: var(--muted); font-style: italic; }
+
+  .use { margin-top: 8mm; }
+  .use ol { list-style: none; counter-reset: step; }
+  .use li {
+    counter-increment: step; position: relative;
+    padding: 0 0 10px 32px; font-size: 13px; line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+  .use li::before {
+    content: counter(step); position: absolute; left: 0; top: -1px;
+    width: 23px; height: 23px; background: var(--accent); color: #fff;
+    border-radius: 50%; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; font-family: Georgia, serif;
+  }
+
+  .note {
+    margin-top: 7mm; background: #fff; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: 6px;
+    padding: 4mm 5mm; font-size: 11.5px; line-height: 1.5; color: var(--muted);
+  }
+  .note b { color: var(--ink); }
+
+  footer {
+    margin-top: auto; padding-top: 7mm; border-top: 1px solid var(--line);
+    font-size: 10px; color: var(--muted); display: flex; justify-content: space-between;
+    gap: 10px; flex-wrap: wrap;
+  }
+
+  @media print {
+    html, body { background: #fff; }
+    .page { width: 210mm; min-height: 297mm; margin: 0; padding: 16mm 16mm 13mm; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="page">
+    <header>
+      <div class="eyebrow">Chicken Marinade &middot; 03</div>
+      <h1>Sweet &amp; Spicy Korean</h1>
+      <div class="meta">
+        <span class="chip"><b>For</b> 6 chicken thighs</span>
+        <span class="chip"><b>Scaled</b> &times;1.5</span>
+      </div>
+    </header>
+    <section class="ingredients">
+      <div class="section-label">Marinade</div>
+      <ul>
+        <li class="chicken">6 chicken thighs, fat trimmed</li>
+        <li>5&ndash;7 cloves garlic, minced</li>
+        <li>3 heaping Tbsp gochujang paste</li>
+        <li>3 Tbsp soy sauce</li>
+        <li>3 Tbsp oyster sauce</li>
+        <li>1.5 tsp rice vinegar</li>
+        <li>1&ndash;2 dashes fish sauce</li>
+        <li>1.5 tsp sesame oil</li>
+        <li>1.5 Tbsp gochugaru (more if you like it spicier)</li>
+        <li>Pinch of salt</li>
+        <li>1.5 tsp cracked black pepper</li>
+        <li>4.5 Tbsp water</li>
+        <li>Sliced scallions <span class="opt">(optional)</span></li>
+      </ul>
+    </section>
+    <section class="use">
+      <div class="section-label" style="font-size:14px;">How to use</div>
+      <ol>
+        <li>Combine all the marinade ingredients and coat the chicken thoroughly.</li>
+        <li>Marinate before cooking &mdash; a few hours, or overnight in the fridge for deeper flavour.</li>
+        <li>Cook the chicken through to 165&deg;F / 74&deg;C; finish with scallions.</li>
+      </ol>
+    </section>
+    <div class="note"><b>Quantities:</b> the original is written for 4 chicken thighs &mdash; everything here is scaled up by half (&times;1.5) to suit 6. Pinch of salt and dash of fish sauce don't scale neatly, so adjust to taste. <b>How to use</b> is general marinade guidance &mdash; the original post listed ingredients only.</div>
+    <footer><span>Chicken marinade</span><span>Recipe by @seemagetsbaked</span></footer>
+  </div>
+
+</body>
+</html>
