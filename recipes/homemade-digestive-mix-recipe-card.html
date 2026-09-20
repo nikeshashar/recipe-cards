@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homemade Digestive Mix — Recipe Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0A0A0A;                          /* obsidian */
+    --cream: #101010;                       /* card sheet (name kept for house convention) */
+    --accent-soft: #141414;                 /* charcoal panel (name kept) */
+    --ink: #F2F0E4;                         /* champagne cream */
+    --muted: #8F8F8F;                       /* pewter */
+    --accent: #D4AF37;                      /* metallic gold */
+    --accent-bright: #F2E8C4;
+    --line: rgba(212, 175, 55, 0.3);
+    --line-soft: rgba(212, 175, 55, 0.14);
+    --font-display: "Marcellus", Georgia, "Times New Roman", serif;
+    --font-body: "Josefin Sans", Futura, "Century Gothic", "Trebuchet MS", sans-serif;
+    --hatch: rgba(212, 175, 55, 0.035);
+    --glow: rgba(212, 175, 55, 0.12);
+    --glow-strong: rgba(212, 175, 55, 0.25);
+  }
+  /* Light Art Deco variant — ivory & antique gold. Toggled by the button
+     below via data-theme on <html>; dark is the default. */
+  :root[data-theme="light"] {
+    --bg: #EDE7D8;
+    --cream: #FAF7EE;
+    --accent-soft: #F3EDDE;
+    --ink: #2B2416;
+    --muted: #7A6F5C;
+    --accent: #8C6D1F;
+    --accent-bright: #5E4813;
+    --line: rgba(140, 109, 31, 0.4);
+    --line-soft: rgba(140, 109, 31, 0.18);
+    --hatch: rgba(140, 109, 31, 0.05);
+    --glow: rgba(60, 46, 10, 0.12);
+    --glow-strong: rgba(140, 109, 31, 0.3);
+  }
+  html, body {
+    background-color: var(--bg);
+    background-image:
+      repeating-linear-gradient(45deg, var(--hatch) 0 1px, transparent 1px 16px),
+      repeating-linear-gradient(-45deg, var(--hatch) 0 1px, transparent 1px 16px);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+
+  .eyebrow { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+  h1 { font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(24px, 5.5vw, 34px); line-height: 1.15;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--accent); overflow-wrap: anywhere; }
+  .subtitle { margin-top: 8px; font-size: 12px; letter-spacing: 0.08em;
+    color: var(--muted); overflow-wrap: anywhere; }
+
+  .section-label { font-family: var(--font-display); font-size: 14px; font-weight: 400;
+    text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent);
+    margin-bottom: 10px; }
+
+  .ingredients { background: var(--accent-soft); border: 1px solid var(--line);
+    border-radius: 0; position: relative; }
+  .ingredients::before, .ingredients::after {
+    content: ""; position: absolute; width: 14px; height: 14px; pointer-events: none; }
+  .ingredients::before { top: 4px; left: 4px;
+    border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+  .ingredients::after { bottom: 4px; right: 4px;
+    border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+  .ingredients ul { list-style: none; }
+  .ingredients li { font-size: 12.5px; line-height: 1.45; padding: 5px 0 5px 18px;
+    border-bottom: 1px solid var(--line-soft); position: relative;
+    overflow-wrap: anywhere; }
+  .ingredients li:last-child { border-bottom: none; }
+  .ingredients li::before { content: ""; position: absolute; left: 1px; top: 10px;
+    width: 6px; height: 6px; border: 1.5px solid var(--accent);
+    transform: rotate(45deg); }
+  .g { color: var(--muted); font-size: 11px; }
+
+  footer { margin-top: auto; padding-top: 6mm; border-top: 1px solid var(--line);
+    font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); display: flex; justify-content: space-between;
+    gap: 10px; flex-wrap: wrap; }
+
+  .page {
+    width: 100%; max-width: 210mm; margin: 0 auto; min-height: 100vh;
+    background-color: var(--cream);
+    background-image:
+      linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)),
+      linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)),
+      linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)),
+      linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent));
+    background-size: 22px 2px, 2px 22px, 22px 2px, 2px 22px, 22px 2px, 2px 22px, 22px 2px, 2px 22px;
+    background-position: top left, top left, top right, top right,
+      bottom left, bottom left, bottom right, bottom right;
+    background-repeat: no-repeat;
+    border: 1px solid var(--line);
+    box-shadow: 0 0 25px var(--glow);
+    padding: clamp(18px, 4.5vw, 15mm);
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .page > * { position: relative; }
+  .page::before { content: ""; position: absolute; inset: 7px;
+    border: 1px solid var(--line-soft); pointer-events: none; }
+
+  header { text-align: center; border-bottom: 2px solid var(--accent); padding-bottom: 6mm; }
+
+  .method ol { list-style: none; counter-reset: step; }
+  .method li { counter-increment: step; position: relative;
+    padding: 0 0 12px 34px; font-size: 13px; line-height: 1.55;
+    overflow-wrap: anywhere; }
+  .method li::before { content: counter(step);
+    position: absolute; left: 0; top: -1px;
+    width: 24px; height: 24px; background: var(--accent); color: var(--bg);
+    border-radius: 0; font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); }
+  .method li:not(:last-child)::after { content: ""; position: absolute; left: 11.5px;
+    top: 27px; bottom: 4px; width: 1px; background: var(--line-soft); }
+
+  .note { margin-top: 8px; font-size: 11px; line-height: 1.5;
+    color: var(--muted); background: var(--accent-soft);
+    border: 1px solid var(--line-soft); border-left: 3px solid var(--accent);
+    border-radius: 0; padding: 3mm 4mm; overflow-wrap: anywhere; }
+  .note b { color: var(--ink); }
+  .serve { margin-top: 6px; background: var(--accent-soft); border: 1px solid var(--line-soft);
+    border-radius: 0; padding: 4mm 5mm; font-size: 12px; line-height: 1.5;
+    overflow-wrap: anywhere; }
+  .serve b { color: var(--accent); }
+
+  .body {
+    display: grid;
+    grid-template-columns: minmax(0, 66mm) minmax(0, 1fr);
+    gap: clamp(16px, 3vw, 11mm);
+    margin-top: 7mm; flex: 1;
+  }
+  .ingredients, .method { min-width: 0; }
+  .ingredients { padding: 6mm; align-self: start; }
+
+  @media (max-width: 560px) {
+    .body { grid-template-columns: 1fr; gap: 7mm; }
+  }
+
+  .theme-toggle {
+    position: fixed; top: 14px; right: 14px; z-index: 10;
+    font-family: inherit; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 0;
+    padding: 10px 16px 8px; cursor: pointer;
+    transition: all .3s ease-out;
+  }
+  .theme-toggle:hover { border-color: var(--accent); box-shadow: 0 0 15px var(--glow-strong); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media print {
+    @page { size: A4; margin: 0; }
+    .theme-toggle { display: none; }
+    html, body { background-color: var(--bg); }
+    .page { width: 210mm; min-height: 297mm; max-width: none;
+      margin: 0 auto; padding: 14mm 15mm 12mm; box-shadow: none; }
+    .body { grid-template-columns: minmax(0, 66mm) minmax(0, 1fr); gap: 11mm; }
+  }
+</style>
+</head>
+<body>
+
+  <button class="theme-toggle" type="button" aria-label="Switch to light theme">Light</button>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Spice Blend</div>
+      <h1>Homemade Digestive Mix</h1>
+      <div class="subtitle">For sudden stomach pain, gas, acidity or indigestion</div>
+    </header>
+
+    <div class="body">
+      <aside class="ingredients">
+        <div class="section-label">Ingredients</div>
+        <ul>
+          <li>30 g roasted fennel seeds <span class="g">(saunf)</span></li>
+          <li>20 g roasted cumin seeds <span class="g">(jeera)</span></li>
+          <li>10 g roasted carom seeds <span class="g">(ajwain)</span></li>
+          <li>10 g roasted coriander seeds <span class="g">(dhaniya)</span></li>
+          <li>10 g dried pomegranate seed powder <span class="g">(anar dana powder)</span></li>
+          <li>2 tsp dried mint powder</li>
+          <li>2 tsp rock salt</li>
+          <li>2 tsp cardamom powder <span class="g">(elaichi powder)</span></li>
+          <li>2 tsp hing <span class="g">(asafoetida)</span></li>
+        </ul>
+      </aside>
+
+      <section class="method">
+        <div class="section-label">Method</div>
+        <ol>
+          <li>Grind all the ingredients.</li>
+          <li>Store in an airtight container. Keeps for up to one month.</li>
+        </ol>
+
+        <div class="serve"><b>How and when to consume</b> &mdash; Take one teaspoon with a glass of lukewarm water, whenever you feel gas or heaviness.</div>
+
+        <div class="note">Shared by the source as a traditional home remedy &mdash; a digestive churna &mdash; not medical advice.</div>
+      </section>
+    </div>
+
+    <footer>
+      <span>Recipe card</span>
+      <span>@nuttyovernutritionn &middot; Instagram</span>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      var KEY = 'recipe-cards-theme';
+      var root = document.documentElement;
+      var btn = document.querySelector('.theme-toggle');
+      function apply(t) {
+        if (t === 'light') { root.setAttribute('data-theme', 'light'); }
+        else { root.removeAttribute('data-theme'); }
+        if (btn) {
+          btn.textContent = t === 'light' ? 'Dark' : 'Light';
+          btn.setAttribute('aria-label', 'Switch to ' + (t === 'light' ? 'dark' : 'light') + ' theme');
+        }
+      }
+      var saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+      apply(saved === 'light' ? 'light' : 'dark');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+          try { localStorage.setItem(KEY, next); } catch (e) {}
+          apply(next);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
